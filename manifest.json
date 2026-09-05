@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "How Many Shares",
+  "version": "1.0",
+  "description": "Calculate how many stock shares you can buy for a given budget including commission.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "How Many Shares Calculator",
+    "default_icon": "icon.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "how-many-shares@local"
+    }
+  }
+}
+

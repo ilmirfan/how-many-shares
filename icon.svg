@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" rx="28" fill="#1e293b"/>
+  <rect x="8" y="8" width="112" height="112" rx="20" fill="url(#bg-grad)" />
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Trending line / Bar chart -->
+  <path d="M28 92 L48 70 L68 80 L100 40" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M100 40 L100 54 M100 40 L86 40" fill="none" stroke="#60a5fa" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Calculator / Coin badge -->
+  <circle cx="96" cy="92" r="16" fill="#f59e0b"/>
+  <text x="96" y="97" font-size="13" font-weight="bold" font-family="sans-serif" fill="#ffffff" text-anchor="middle">Rs</text>
+  
+  <rect x="28" y="32" width="36" height="24" rx="4" fill="#ffffff" fill-opacity="0.2"/>
+  <circle cx="36" cy="44" r="3" fill="#ffffff"/>
+  <circle cx="46" cy="44" r="3" fill="#ffffff"/>
+  <circle cx="56" cy="44" r="3" fill="#ffffff"/>
+</svg>
+

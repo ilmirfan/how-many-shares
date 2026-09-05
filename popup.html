@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Many Shares</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="app-header">
+      <div class="logo">
+        <svg class="header-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23"></line>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <h1>How Many Shares</h1>
+      </div>
+    </header>
+
+    <main class="calculator-form">
+      <div class="input-group">
+        <label for="total-amount">Total Amount / Budget</label>
+        <div class="input-wrapper">
+          <span class="currency-symbol">Rs</span>
+          <input type="number" id="total-amount" placeholder="e.g. 1000" min="0" step="any" autofocus>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="share-price">Share Price</label>
+        <div class="input-wrapper">
+          <span class="currency-symbol">Rs</span>
+          <input type="number" id="share-price" placeholder="e.g. 92" min="0.0001" step="any">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="label-row">
+          <label for="commission-rate">Commission Rate</label>
+          <button type="button" id="reset-commission" class="text-btn" title="Reset commission to default 1.12%">Reset
+            (1.12%)</button>
+        </div>
+        <div class="input-wrapper">
+          <input type="number" id="commission-rate" value="1.12" min="0" max="100" step="0.01">
+          <span class="unit-symbol">%</span>
+        </div>
+      </div>
+
+      <div class="result-card" id="result-card">
+        <div class="primary-result">
+          <span class="result-label">You can buy</span>
+          <div class="shares-count-badge">
+            <span id="max-shares">0</span>
+            <span class="shares-unit">shares</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="breakdown-grid">
+          <div class="breakdown-item">
+            <span class="b-label">Effective Price/Share</span>
+            <span class="b-value" id="effective-price">Rs 0.00</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="b-label">Total Spent</span>
+            <span class="b-value" id="total-cost">Rs 0.00</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="b-label">Stock Value</span>
+            <span class="b-value" id="stock-cost">Rs 0.00</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="b-label">Commission Fee</span>
+            <span class="b-value" id="commission-cost">Rs 0.00</span>
+          </div>
+          <div class="breakdown-item highlight-item">
+            <span class="b-label">Cash Leftover</span>
+            <span class="b-value" id="remaining-cash">Rs 0.00</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="b-label">Exact (Fractional)</span>
+            <span class="b-value" id="exact-shares">0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        <p>Enter budget and share price above to calculate maximum shares.</p>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span>Saved commission rate is remembered for future use.</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
