@@ -13,7 +13,12 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "how-many-shares@local"
+      "id": "how-many-shares@local",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   }
 }
