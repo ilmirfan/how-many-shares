@@ -11,91 +11,234 @@
 <body>
   <div class="container">
     <header class="app-header">
-      <div class="logo">
-        <svg class="header-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="12" y1="1" x2="12" y2="23"></line>
-          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-        </svg>
-        <h1>How Many Shares</h1>
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>How Many Shares</h1>
+        </div>
       </div>
+      <button type="button" id="clear-btn" class="clear-btn" title="Clear inputs" aria-label="Clear active tab inputs">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+        </svg>
+        <span>Clear</span>
+      </button>
     </header>
 
-    <main class="calculator-form">
-      <div class="input-group">
-        <label for="total-amount">Total Amount / Budget</label>
-        <div class="input-wrapper">
-          <span class="currency-symbol">Rs</span>
-          <input type="number" id="total-amount" placeholder="e.g. 1000" min="0" step="any" autofocus>
-        </div>
-      </div>
+    <!-- Mode Navigation Tabs -->
+    <nav class="tab-nav" role="tablist" aria-label="Calculator mode">
+      <button type="button" class="tab-btn active" id="tab-buy" role="tab" aria-selected="true"
+        aria-controls="panel-buy">Buy Calculator</button>
+      <button type="button" class="tab-btn" id="tab-sell" role="tab" aria-selected="false"
+        aria-controls="panel-sell">Target Sell Price</button>
+    </nav>
 
-      <div class="input-group">
-        <label for="share-price">Share Price</label>
-        <div class="input-wrapper">
-          <span class="currency-symbol">Rs</span>
-          <input type="number" id="share-price" placeholder="e.g. 92" min="0.0001" step="any">
-        </div>
-      </div>
-
-      <div class="input-group">
-        <div class="label-row">
-          <label for="commission-rate">Commission Rate</label>
-          <button type="button" id="reset-commission" class="text-btn" title="Reset commission to default 1.12%">Reset
-            (1.12%)</button>
-        </div>
-        <div class="input-wrapper">
-          <input type="number" id="commission-rate" value="1.12" min="0" max="100" step="0.01">
-          <span class="unit-symbol">%</span>
-        </div>
-      </div>
-
-      <div class="result-card" id="result-card">
-        <div class="primary-result">
-          <span class="result-label">You can buy</span>
-          <div class="shares-count-badge">
-            <span id="max-shares">0</span>
-            <span class="shares-unit">shares</span>
+    <!-- Tab 1: Buy Calculator -->
+    <div class="tab-panel active" id="panel-buy" role="tabpanel" aria-labelledby="tab-buy">
+      <main class="calculator-form">
+        <div class="field-group">
+          <label for="total-amount" class="field-label">Total budget</label>
+          <div class="input-wrapper">
+            <span class="input-affix prefix" aria-hidden="true">Rs</span>
+            <input type="number" id="total-amount" placeholder="e.g. 10000" min="0" step="any" autofocus>
           </div>
         </div>
 
-        <div class="divider"></div>
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="share-price" class="field-label">Share price</label>
+            <div class="input-wrapper">
+              <span class="input-affix prefix" aria-hidden="true">Rs</span>
+              <input type="number" id="share-price" placeholder="e.g. 92" min="0.0001" step="any">
+            </div>
+          </div>
 
-        <div class="breakdown-grid">
-          <div class="breakdown-item">
-            <span class="b-label">Effective Price/Share</span>
-            <span class="b-value" id="effective-price">Rs 0.00</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="b-label">Total Spent</span>
-            <span class="b-value" id="total-cost">Rs 0.00</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="b-label">Stock Value</span>
-            <span class="b-value" id="stock-cost">Rs 0.00</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="b-label">Commission Fee</span>
-            <span class="b-value" id="commission-cost">Rs 0.00</span>
-          </div>
-          <div class="breakdown-item highlight-item">
-            <span class="b-label">Cash Leftover</span>
-            <span class="b-value" id="remaining-cash">Rs 0.00</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="b-label">Exact (Fractional)</span>
-            <span class="b-value" id="exact-shares">0.00</span>
+          <div class="field-group">
+            <div class="field-label-row">
+              <label for="commission-rate" class="field-label">Commission</label>
+              <button type="button" id="reset-commission" class="reset-link" title="Reset commission to default 1.12%"
+                aria-label="Reset commission to default 1.12%">Reset</button>
+            </div>
+            <div class="input-wrapper">
+              <input type="number" id="commission-rate" value="1.12" min="0" max="100" step="0.01">
+              <span class="input-affix suffix" aria-hidden="true">%</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="empty-state" id="empty-state">
-        <p>Enter budget and share price above to calculate maximum shares.</p>
-      </div>
-    </main>
+        <div class="result-card" id="result-card" aria-live="polite">
+          <div class="hero-result">
+            <span class="hero-label">Purchasable shares</span>
+            <div class="hero-count-row">
+              <span class="hero-count" id="max-shares">0</span>
+              <span class="hero-unit">shares</span>
+            </div>
+            <div class="exact-badge">
+              <span class="exact-label">Exact fractional:</span>
+              <span class="exact-value" id="exact-shares">0.00</span>
+            </div>
+          </div>
+
+          <div class="breakdown-section">
+            <div class="leftover-banner">
+              <div class="leftover-info">
+                <span class="leftover-label">Cash leftover</span>
+                <span class="leftover-sub">Unspent amount</span>
+              </div>
+              <span class="leftover-value" id="remaining-cash">Rs 0.00</span>
+            </div>
+
+            <div class="breakdown-grid">
+              <div class="breakdown-cell">
+                <span class="cell-label">Stock value</span>
+                <span class="cell-value" id="stock-cost">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Commission fee</span>
+                <span class="cell-value" id="commission-cost">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Total spent</span>
+                <span class="cell-value" id="total-cost">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Effective price/share</span>
+                <span class="cell-value" id="effective-price">Rs 0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M7 15h0M12 15h0M17 15h0M7 11h0M12 11h0M17 11h0M7 7h10"></path>
+            </svg>
+          </div>
+          <p class="empty-title">Ready to calculate</p>
+          <p class="empty-desc">Enter your total budget and share price above to see how many shares you can buy.</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Tab 2: Target Sell Price Calculator -->
+    <div class="tab-panel" id="panel-sell" role="tabpanel" aria-labelledby="tab-sell" hidden>
+      <main class="calculator-form">
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="sell-buy-price" class="field-label">Buying price</label>
+            <div class="input-wrapper">
+              <span class="input-affix prefix" aria-hidden="true">Rs</span>
+              <input type="number" id="sell-buy-price" placeholder="e.g. 92" min="0.0001" step="any">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="sell-quantity" class="field-label">Number of shares</label>
+            <div class="input-wrapper">
+              <input type="number" id="sell-quantity" placeholder="e.g. 100" min="1" step="any">
+              <span class="input-affix suffix" aria-hidden="true">qty</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="sell-profit-amount" class="field-label">Net profit amount</label>
+            <span class="field-hint">After all fees</span>
+          </div>
+          <div class="chips-row" role="group" aria-label="Quick net profit presets">
+            <button type="button" class="chip-btn" data-profit="1000">+Rs 1,000</button>
+            <button type="button" class="chip-btn" data-profit="2000">+Rs 2,000</button>
+            <button type="button" class="chip-btn" data-profit="5000">+Rs 5,000</button>
+          </div>
+          <div class="input-wrapper">
+            <span class="input-affix prefix" aria-hidden="true">Rs</span>
+            <input type="number" id="sell-profit-amount" placeholder="e.g. 1000" min="0" step="any">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="sell-commission-rate" class="field-label">Total commission (Buy + Sell)</label>
+            <button type="button" id="reset-sell-commission" class="reset-link"
+              title="Reset commission to default 2.24%" aria-label="Reset commission to default 2.24%">Reset (2.24%)</button>
+          </div>
+          <div class="input-wrapper">
+            <input type="number" id="sell-commission-rate" value="2.24" min="0" max="100" step="0.01">
+            <span class="input-affix suffix" aria-hidden="true">%</span>
+          </div>
+        </div>
+
+        <div class="result-card" id="sell-result-card" aria-live="polite">
+          <div class="hero-result">
+            <span class="hero-label">Target selling price</span>
+            <div class="hero-count-row">
+              <span class="hero-count" id="target-sell-price">Rs 0.00</span>
+            </div>
+            <div class="exact-badge" id="sell-gain-badge">
+              <span class="exact-label">Required rise:</span>
+              <span class="exact-value" id="price-rise-needed">+Rs 0.00 (+0.0%)</span>
+            </div>
+          </div>
+
+          <div class="breakdown-section">
+            <div class="leftover-banner">
+              <div class="leftover-info">
+                <span class="leftover-label">Net profit</span>
+                <span class="leftover-sub">Target realized gain</span>
+              </div>
+              <span class="leftover-value" id="sell-net-profit-val">Rs 0.00</span>
+            </div>
+
+            <div class="breakdown-grid">
+              <div class="breakdown-cell">
+                <span class="cell-label">Total investment</span>
+                <span class="cell-value" id="sell-total-buy-cost">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Total sales value</span>
+                <span class="cell-value" id="sell-total-revenue">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Total fees (2.24%)</span>
+                <span class="cell-value" id="sell-total-commission">Rs 0.00</span>
+              </div>
+              <div class="breakdown-cell">
+                <span class="cell-label">Break-even price</span>
+                <span class="cell-value" id="sell-breakeven-price">Rs 0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" id="sell-empty-state">
+          <div class="empty-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </div>
+          <p class="empty-title">Calculate selling price</p>
+          <p class="empty-desc">Enter your buying price, share quantity, and desired profit to calculate your target selling price.</p>
+        </div>
+      </main>
+    </div>
 
     <footer class="app-footer">
-      <span>Saved commission rate is remembered for future use.</span>
+      <span>Figures & commission rate are remembered automatically.</span>
     </footer>
   </div>
 
